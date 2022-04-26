@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import AsideContent from "./pages/Aside/AsideContent";
+import Contacto from "./pages/Contacto/Contacto";
+import Footer from "./pages/footer/Footer";
+import Home from "./pages/Home/Home";
+import Layout from "./pages/Layout/Layout";
+import Listado from "./pages/Listado/Listado";
+import NoPage from "./pages/Nopage/NoPage";
+import SobreNosotros from "./pages/SobreNostros/SobreNosotros";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header className="myHeader">
+        <h1>Aplicación de ejemplo</h1>
       </header>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/listado" element={<Listado />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/sobreNosotros" element={<SobreNosotros />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+      <Footer />
     </div>
   );
 }
