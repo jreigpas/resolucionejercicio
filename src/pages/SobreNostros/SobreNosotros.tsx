@@ -1,14 +1,12 @@
 const SobreNosotros = () => {
-
   return (
     <div className="main">
-     <h2>Sobre nostros</h2>
-     <p>
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-      nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-      volutpat.
-     </p>
-  </div>
+      <h2>Sobre nostros</h2>
+      <p>
+        Usamos las propiedades y los estados para mostrar la información en las
+        disitintas opciones de la página
+      </p>
+    </div>
   );
 };
 

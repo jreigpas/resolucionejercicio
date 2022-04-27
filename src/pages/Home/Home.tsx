@@ -2,11 +2,10 @@ const Home = () => {
 
   return (
     <div className="main">
-     <h2>Título del contenido</h2>
+     <h2>Contenido principal</h2>
      <p>
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-      nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-      volutpat.
+      En las distintas opciones podremos encontrar un listado de usuarios,
+      un gráfico de ingresos y un formulario de contacto
      </p>
   </div>
   );
