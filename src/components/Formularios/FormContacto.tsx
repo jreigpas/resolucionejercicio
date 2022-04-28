@@ -1,26 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+//import { Redirect } from "react-router";
+import { Navigate, useNavigate } from "react-router-dom"
 import './FormContacto.css';
+//import { useNavigate } from 'react-router-dom';
+//import { Redirect } from "react-router";
 
 const FormContacto = () => {
+
   const [datos, setDatos] = useState({
     nombre: "",
     apellido: "",
     descripcion: "",
-    sabor: ""
+    orientacion: "",
+    jornada: ""
   });
 
+  let navigate = useNavigate();
+
   const handleInputChange = (event: any) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
     setDatos({
       ...datos,
       [event.target.name]: event.target.value,
     });
   };
 
+   useEffect(() => {
+       const dataForm : string = localStorage.getItem("dataForm") ? localStorage.getItem("dataForm") || '': '';
+       setDatos(JSON.parse(dataForm));
+
+  }, []);
+
   const enviarDatos = (event: any) => {
     event.preventDefault();
-    console.log("enviando datos..." + datos.nombre + " " + datos.apellido + " "+datos.descripcion+" "+datos.sabor);
+    console.log("enviando datos..." + JSON.stringify(datos));
+    localStorage.setItem("dataForm",JSON.stringify(datos));
+    setDatos({
+      nombre: "",
+      apellido: "",
+      descripcion: "",
+      orientacion: "",
+      jornada: ""
+    });
+    navigate("/");
   };
 
   return (
@@ -38,6 +59,7 @@ const FormContacto = () => {
               className="form-control"
               onChange={handleInputChange}
               name="nombre"
+              value={datos.nombre}
             />
             </div>
         </div>
@@ -52,6 +74,7 @@ const FormContacto = () => {
               className="form-control"
               onChange={handleInputChange}
               name="apellido"
+              value={datos.apellido}
             />
             </div>
         </div>
@@ -71,17 +94,63 @@ const FormContacto = () => {
         <div className="row">
           <div className="col-25">
             <label htmlFor="nombre">
-              Elige el sabor:</label>
+              Elige la orientación:</label>
           </div>
           <div className="col-75">
-            <select value={datos.sabor} onChange={handleInputChange} name="sabor">
-              <option value="uva">Uva</option>
-              <option value="limon">Limón</option>
-              <option value="coco">Coco</option>
-              <option value="mango">Mango</option>
+            <select value={datos.orientacion} onChange={handleInputChange} name="orientacion">
+              <option value="N">Norte</option>
+              <option value="S">Sur</option>
+              <option value="E">Este</option>
+              <option value="O">Oeste</option>
             </select>
           </div>
         </div>
+
+        <div className="row">
+            <div className="col-25">
+              <label htmlFor="nombre">
+              Elige el horario:</label>
+            </div>
+            <div className="col-75">
+              <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    name="jornada"
+                    value="Mañana"
+                    checked={datos.jornada === "Mañana"}
+                    onChange={handleInputChange}
+                  />
+                  Mañana
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    name="jornada"
+                    value="Tarde"
+                    checked={datos.jornada === "Tarde"}
+                    onChange={handleInputChange}
+                  />
+                  Tarde
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    name="jornada"
+                    value="Partido"
+                    checked={datos.jornada === "Partido"}
+                    onChange={handleInputChange}
+                  />
+                  Partida
+                </label>
+             </div>
+            </div>
+        </div>
+
         <div className="row">
            <button type="submit" className="btn btn-primary">
              Enviar
@@ -92,7 +161,8 @@ const FormContacto = () => {
         <p>Nombre: {datos.nombre}</p>
         <p>Apellido: {datos.apellido}</p>
         <p>Descripcion: {datos.descripcion}</p>
-        <p>Sabor: {datos.sabor}</p>
+        <p>Orientación: {datos.orientacion}</p>
+        <p>Jornada: {datos.jornada}</p>
       </div>
     </div>
   );
