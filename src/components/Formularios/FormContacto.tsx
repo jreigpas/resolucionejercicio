@@ -25,8 +25,10 @@ const FormContacto = () => {
   };
 
    useEffect(() => {
-       const dataForm : string = localStorage.getItem("dataForm") ? localStorage.getItem("dataForm") || '': '';
-       setDatos(JSON.parse(dataForm));
+     if (localStorage.getItem("dataForm")){
+      const dataForm : string = localStorage.getItem("dataForm") ? localStorage.getItem("dataForm") || '': '';
+      setDatos(JSON.parse(dataForm));
+     }
 
   }, []);
 
