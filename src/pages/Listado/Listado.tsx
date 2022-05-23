@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Graficos from "../../components/Graficos/Graficos";
-import Table from "../../components/Table/Table";
+import { lazy, Suspense, useState } from "react";
 import ToggleSwitch from "../../components/ToggleSwitch/ToggleSwitch";
+const Table = lazy(() => import("../../components/Table/Table"));
+const Graficos = lazy(() => import("../../components/Graficos/Graficos"));
 
 const Listado = () => {
   const [checked, setChecked] = useState(true);
@@ -17,7 +17,15 @@ const Listado = () => {
         />
       </div>
 
-      {checked ? <Table /> : <Graficos />}
+      {checked ? (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Table />
+        </Suspense>
+      ) : (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Graficos />
+        </Suspense>
+      )}
     </div>
   );
 };
