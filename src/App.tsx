@@ -13,6 +13,9 @@ function App() {
     <div>
       <header className="myHeader">
         <h1>Aplicación construida con React</h1>
+        <p>
+          {process.env.REACT_APP_VARIABLE}
+        </p>
       </header>
       <BrowserRouter>
         <Routes>
